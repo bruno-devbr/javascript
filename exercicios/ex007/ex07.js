@@ -7,7 +7,7 @@ let menssage = document.getElementById('aviso')
 function gerarNumeroSecreto() {
     let min = 1
     let max = 10
-    number = Math.floor(Math.random() * max - min +1) + min
+    number = Math.floor(Math.random() * (max - min +1)) + min
 }
 
 window.onload = gerarNumeroSecreto()
