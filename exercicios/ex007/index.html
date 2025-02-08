@@ -8,7 +8,7 @@
     <title>Aula 17 de JS</title>
     <link rel="stylesheet" href="style.css" />
 </head>
-<body onLoad='gerarNumeroSecreto(), desativarBtnChutar()'>
+<body>
     <main id="tela-inicial">
         <div id='titulo'><h1>Adivinhar número secreto</h1></div>
         <p class='centro' id='dica'>Digite um número entre 1 e 10</p>
@@ -21,8 +21,6 @@
                 name="inputNumero"
                 id="inputNumero"
                 class="input animar"
-                onblur="desativarBtnChutar()"
-                onClick="tocarMusicaDeFundo(); ativarBtnChutar()"
             />
             <button
                 id='btnChutar'
@@ -31,8 +29,7 @@
             <br>
             <button
                 id='btnSom'
-                class='botao'
-                onClick="ativarDesativarMusica()"    
+                class='botao'   
             >&#9835;</button>
         </section>
         <p class='centro' id='aviso'></p>

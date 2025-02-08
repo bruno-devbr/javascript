@@ -1,59 +1,86 @@
-let inputNumero = document.getElementById('inputNumero')
-let btnChutar = document.getElementById('btnChutar')
-let aviso = document.getElementById('aviso')
+let numeroClass = document.getElementById('inputNumero')
+let sendClass = document.getElementById('btnChutar')
+let soundBtn = document.getElementById('btnSom')
+let sound = document.getElementById('musicaDeFundo')
+let menssage = document.getElementById('aviso')
 
-let musicaDeFundo = document.getElementById('musicaDeFundo')
-let btnSom = document.getElementById('musicaDeFundo')
-
-let musica = document.getElementById('musicaDeFundo')
-
-function gerarNumeroSecreto(min, max) {
-    Math.ceil(min)
-    Math.floor(max)
-    let number = Math.floor(Math.random() * max - min +1) + min
-    return number
+function gerarNumeroSecreto() {
+    let min = 1
+    let max = 10
+    number = Math.floor(Math.random() * max - min +1) + min
 }
 
-function tocarMusicaDeFundo() {
-    musicaDeFundo.play()
-}
+window.onload = gerarNumeroSecreto()
 
-function desativarBtnChutar() {
-    btnChutar.setAttribute('disable', 'disable')
-    btnChutar.style.cursor = 'not-allowed'
-    btnChutar.style.background = '#ccc'
-}
-
-function ativarBtnChutar() {
-    btnChutar.removeAttribute('disable')
-    btnChutar.style.background = '#222'
-    btnChutar.style.cursor = 'pointer'
-}
-
-inputNumero.addEventListener('blur', function() {
-    if (inputNumero.value == '') {
-    aviso.setAttribute("class", "errou")
-    aviso.textContent = 'Você não está sendo um(a) mentalista! Digite um número inteiro entre 1 e 10.'
+soundBtn.addEventListener('click', function() {
+    if (!sound.paused) {
+        sound.pause()
+        sound.currentTime = 0
+    } else { 
+        sound.play()
     }
 })
 
-btnChutar.addEventListener('click', function() {
-    if (inputNumero.value == gerarNumeroSecreto(1, 10)) {
-        aviso.setAttribute("class", "acertou")
-        aviso.textContent = 'Acertou, o número secreto era'
-    } else if (inputNumero.value < gerarNumeroSecreto(1, 10)) {
-        aviso.setAttribute("class", "errou")
-        aviso.textContent = 'Chute menor que o número secreto'
-    } else if (inputNumero.value > gerarNumeroSecreto(1, 10)) {
-        aviso.setAttribute("class", "errou")
-        aviso.textContent = 'Chute maior que o número secreto'
+numeroClass.addEventListener('click', tocarAudio)
+numeroClass.addEventListener('blur', bloquearBtn)
+
+function tocarAudio() {
+    if (sound.paused) {
+        sound.play()
+        numeroClass.removeEventListener('click', tocarAudio)
+    }
+}
+
+sendClass.addEventListener('click', function() {
+    verificarNumero()
+    setTimeout(function() {
+        aviso.textContent = ''
+        aviso.classList.remove('acertou')
+        aviso.classList.remove('errou')
+        numeroClass.value = ''
+    }, 3000)
+    if (numeroClass.value == number) {
+        gerarNumeroSecreto()
     }
 })
 
-function ativarDesativarMusica() {
-    if (musica.paused) {
-        musica.play();
-    } else {
-        musica.pause();
+function verificarNumero() {
+    const valor = Number(numeroClass.value);
+
+    // Verifica se o valor é válido (entre 1 e 10)
+    if (isNaN(valor) || valor < 1 || valor > 10) {
+        bloquearBtn();
+        return;
     }
+
+    // Verifica o número secreto
+    if (valor == number) {
+        aviso.classList = 'acertou';
+        aviso.textContent = 'Acertou! O número secreto era ' + number;
+    } else if (valor > number) {
+        aviso.classList = 'errou';
+        aviso.textContent = 'Chute maior que o número secreto';
+    } else if (valor < number) {
+        aviso.classList = 'errou';
+        aviso.textContent = 'Chute menor que o número secreto';
+    }
+}
+
+function bloquearBtn() {
+    sendClass.disabled = true; // Desabilita o botão
+    sendClass.style.background = '#ccc';
+    sendClass.style.cursor = 'not-allowed';
+    aviso.classList.add('errou');
+    aviso.textContent = 'Você não está sendo um(a) mentalista! Digite um número inteiro entre 1 e 10';
+    setTimeout(ativarBtn, 3000); // Ativa o botão novamente após 3 segundos
+}
+
+function ativarBtn() {
+    aviso.textContent = '';
+    aviso.classList.remove('acertou');
+    aviso.classList.remove('errou');
+    numeroClass.value = '';
+    sendClass.disabled = false; // Habilita o botão novamente
+    sendClass.style.background = '#222';
+    sendClass.style.cursor = 'pointer';
 }
