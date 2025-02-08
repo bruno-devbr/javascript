@@ -1,42 +1,42 @@
-/* Aula 16 de jS Numero Secreto */
+/* Aula 17 de JS Numero Secreto */
 
 let numeroSecreto = 0
-// numeroDeChances = 3
+//let numeroDeChances = 3
 let contador = 1
 let min = 1
 let max = 10
 let situacao = ''
 
-// Selecionar elementos
-let inputNumero = document.querySelector('#inputNumero')
-let btnChutar = document.querySelector('#btnChutar')
-let aviso = document.querySelector('#aviso')
-let musica = document.querySelector('#musicaDeFundo')
+// selecionar elementos
+let inputNumero = document.querySelector('#inputNumero')  // input Numero
+let btnChutar   = document.querySelector('#btnChutar') // botao Chutar
+let aviso       = document.querySelector('#aviso')     // paragrafo do aviso
+let musica      = document.querySelector('#musicaDeFundo')
 
-// Funçoes ou metodos para controlar o jogo 
+// FUNCOES OU METODOS PARA CONTROLAR O JOGO
 function gerarNumeroSecreto() {
     // gerar numero secreto
-    numeroSecreto = Math.floor(Math.random() * max - min +1) + min
-    // console.log(numeroSecreto)
+    numeroSecreto = Math.floor(Math.random() * (max - min + 1)) + min
+    //console.log(numeroSecreto)
 }
 
 function bloquearBtnChutar() {
-    btnChutar.setAttribute('disable', 'disable')
-    btnChutar.computedStyleMap.background = '#ccc'
-    btnChutar.computedStyleMap.cursor = 'not-allowed'
+    btnChutar.setAttribute('disabled', 'disabled')
+    btnChutar.style.background = '#ccc'
+    btnChutar.style.cursor = 'not-allowed'
 }
 
 function ativarBtnChutar() {
-    btnChutar.removeAttribute('disable')
-    btnChutar.computedStyleMap.background = '#222'
-    btnChutar.computedStyleMap.cursor = 'pointer'
+    btnChutar.removeAttribute('disabled')
+    btnChutar.style.background = '#222'
+    btnChutar.style.cursor = 'pointer'
 }
 
 function validarNumeroDigitado(numero) {
-    if (numero < 0 || numero > 10) {
+    if(numero <= 0 || numero > 10) {
         console.log('Tentativa inválida!')
         aviso.classList.add('errou')
-        mensagemRapida('Você não está sendo um(a) mentalista! Digite um número inteiro de 1 a 10')
+        mensagemRapida('Você não está sendo um(a) mentalista! Digite um número inteiro entre 1 e 10.')
         bloquearBtnChutar()
         inputNumero.value = ''
     } else {
@@ -44,26 +44,26 @@ function validarNumeroDigitado(numero) {
     }
 }
 
-/* METODOS OU FUNÇÕES PARA MANIPULAR MUSICA */
+/* METODOS PARA MANIPULAR MUSICA */
 function tocarMusicaDeFundo() {
     musica.play()
 }
 
-function ativarDesativarMusica() {
-    if (musica.muted) {
-        musica.muted = false
-    } else {
-        musica.muted = true
+function ativarDesativarMusica(){
+    if( musica.muted ){
+        musica.muted = false;
+    }else{
+        musica.muted = true;
     }
 }
 
 function pausarMusicaDeFundo() {
     musica.pause()
-    musica.currentTime = 0
+    musica.currentTime = 0;
 }
 
 function jogar() {
-    console.log('Jogando')
+    console.log("Jogando")
     verificarSeAcertou()
 }
 
@@ -77,39 +77,42 @@ function mensagemRapida(mensagem) {
     }, 3000)
 }
 
-function gameOver() {
-    switch(situacao) {
+function gameOver(situacao) {
+    switch (situacao) {
+
         case 'Acertou':
             aviso.classList.add('acertou')
-            mensagemRapida('Acertou o numero sercerto era ' + numeroSecreto)
+            mensagemRapida('Acertou, o número secreto era ' + numeroSecreto)
         break
 
         case 'Chute maior':
+            mensagemRapida('Chute maior que o número secreto')
             aviso.classList.add('errou')
-            mensagemRapida('Chute maior que o numero secreto')
         break
 
         case 'Chute menor':
             aviso.classList.add('errou')
-            mensagemRapida('Chute menor que o numero secreto')
+            mensagemRapida('Chute menor que o número secreto')
         break
 
         default:
             console.log('Informe a situação')
-    }
+
+    } // fim do switch case
 }
 
 function verificarSeAcertou() {
+    // pegar o valor do input numero digitado e converter para inteiro
     chute = parseInt(document.querySelector('#inputNumero').value)
-
+    
     console.log('Nº do Chute ' + contador)
     console.log('Chute ' + chute)
-
-    if (numeroSecreto === chute) {
+    
+    if(numeroSecreto === chute) {
         console.log('Acertou')
         situacao = 'Acertou'
         gameOver(situacao)
-        gerarNumeroSecreto()
+        gerarNumeroSecreto() // gerar novo numero secreto
     } else if (chute > numeroSecreto) {
         console.log('Chute maior')
         situacao = 'Chute maior'
@@ -119,6 +122,7 @@ function verificarSeAcertou() {
         situacao = 'Chute menor'
         gameOver(situacao)
     } else {
-        console.log('Impossivel verificar se acertou')
+        console.log('Impossível verificar se acertou!')
     }
+
 }
