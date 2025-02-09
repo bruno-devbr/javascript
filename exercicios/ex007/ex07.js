@@ -14,7 +14,6 @@ function gerarNumero() {
 }
 
 window.onload = gerarNumero()
-console.log(number)
 
 // eventos relacionado a musica de fundo
 soundBtn.addEventListener('click', function() {
@@ -63,7 +62,6 @@ function verificaAcerto() {
         aviso.classList.add('acertou')
         aviso.textContent = 'Acertou, o número secreto era ' + number
         gerarNumero()
-        console.log(number)
     } else if (numero > number) {
         aviso.classList.remove('acertou')
         aviso.classList.add('errou')
