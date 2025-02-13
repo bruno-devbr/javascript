@@ -3,6 +3,9 @@ let questions = document.getElementById('questoes')
 let nQuestao = document.getElementById('numQuestao')
 let pergunta = document.getElementById('pergunta')
 
+let numero = document.getElementById('numero')
+let total = document.getElementById('total')
+
 let a = document.getElementById('a')
 let b = document.getElementById('b')
 let c = document.getElementById('c')
@@ -57,3 +60,40 @@ let q5 = {
 
 // armazena as questoes em um array
 let questoes = [q1, q2, q3, q4, q5]
+
+// variavel para controlar o index do array
+let index = 0
+
+// funcao para controlar o numero da questao
+function numQuestao() {
+    for (index; index < questoes.length; index++) {
+        pergunta.textContent = questoes[index].pergunta
+        a.textContent = questoes[index].alternativaA
+        b.textContent = questoes[index].alternativaB
+        c.textContent = questoes[index].alternativaC
+        nQuestao.textContent = questoes[index].numQuestao
+        return index
+    }
+}
+
+// mostrar a questao atual
+pergunta.textContent = questoes[index].pergunta
+a.textContent = questoes[index].alternativaA
+b.textContent = questoes[index].alternativaB
+c.textContent = questoes[index].alternativaC
+nQuestao.textContent = questoes[index].numQuestao
+numero.textContent = index + 1
+total.textContent = questoes.length
+
+// passa para a proxima questao
+function proximaQuestao() {
+    if (index < questoes.length) {
+        index++
+        numQuestao()
+    }
+}
+
+// adiciona um clique no botao e chama a proxima questao
+a.addEventListener('click', proximaQuestao)
+b.addEventListener('click', proximaQuestao)
+c.addEventListener('click', proximaQuestao)
