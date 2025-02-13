@@ -2,6 +2,7 @@
 let questions = document.getElementById('questoes')
 let nQuestao = document.getElementById('numQuestao')
 let pergunta = document.getElementById('pergunta')
+let instrucoes = document.getElementById('instrucoes')
 
 let numero = document.getElementById('numero')
 let total = document.getElementById('total')
@@ -11,6 +12,9 @@ let b = document.getElementById('b')
 let c = document.getElementById('c')
 
 let mensagem = document.getElementById('aviso')
+let resposta = []
+let pontos = 0
+let points = 0
 
 // questoes dentro de objetos
 let q1 = { 
@@ -19,7 +23,7 @@ let q1 = {
     alternativaA: 'Sul',
     alternativaB: 'Leste',
     alternativaC: 'Norte',
-    correta: 'Norte'
+    correta: 'c'
 }
 
 let q2 = {
@@ -28,7 +32,7 @@ let q2 = {
     alternativaA: 'Oeste',
     alternativaB: 'Sul',
     alternativaC: 'Norte',
-    correta: 'Sul'
+    correta: 'b'
 }
 
 let q3 = {
@@ -37,7 +41,7 @@ let q3 = {
     alternativaA: 'Sul',
     alternativaB: 'Leste',
     alternativaC: 'Oeste',
-    correta: 'Leste'
+    correta: 'b'
 }
 
 let q4 = {
@@ -46,7 +50,7 @@ let q4 = {
     alternativaA: 'Norte',
     alternativaB: 'Leste',
     alternativaC: 'Oeste',
-    correta: 'Oeste'
+    correta: 'c'
 }
 
 let q5 = {
@@ -55,7 +59,7 @@ let q5 = {
     alternativaA: 'Norte',
     alternativaB: 'Leste',
     alternativaC: 'Oeste',
-    correta: 'Leste'
+    correta: 'b'
 }
 
 // armazena as questoes em um array
@@ -77,23 +81,45 @@ function numQuestao() {
 }
 
 // mostrar a questao atual
-pergunta.textContent = questoes[index].pergunta
-a.textContent = questoes[index].alternativaA
-b.textContent = questoes[index].alternativaB
-c.textContent = questoes[index].alternativaC
-nQuestao.textContent = questoes[index].numQuestao
-numero.textContent = index + 1
-total.textContent = questoes.length
+function exibir() {
+    pergunta.textContent = questoes[index].pergunta
+    a.textContent = questoes[index].alternativaA
+    b.textContent = questoes[index].alternativaB
+    c.textContent = questoes[index].alternativaC
+    nQuestao.textContent = questoes[index].numQuestao
+    numero.textContent = index + 1
+    total.textContent = questoes.length
+}
 
 // passa para a proxima questao
-function proximaQuestao() {
+function proximaQuestao(respostaEscolhida) {
+    resposta[index] = respostaEscolhida
     if (index < questoes.length) {
         index++
         numQuestao()
+        pontuacao()
+        exibir()
     }
 }
 
+function pontuacao() {
+    if (resposta[index - 1] == questoes[index - 1].correta) {
+        pontos += 10
+    }
+    instrucoes.textContent = `Pontuação: ${pontos}`
+    console.log(pontos)
+}
+
 // adiciona um clique no botao e chama a proxima questao
-a.addEventListener('click', proximaQuestao)
-b.addEventListener('click', proximaQuestao)
-c.addEventListener('click', proximaQuestao)
+a.addEventListener('click', function () {
+    proximaQuestao('a')
+})
+b.addEventListener('click', function () {
+    proximaQuestao('b')
+})
+c.addEventListener('click', function () {
+    proximaQuestao('c')
+})
+
+// chama a funcao para exibir a questao
+exibir()
