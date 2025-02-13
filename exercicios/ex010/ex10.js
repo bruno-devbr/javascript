@@ -13,7 +13,7 @@ let c = document.getElementById('c')
 
 let mensagem = document.getElementById('aviso')
 let resposta = []
-let pontos = 0
+let pontos = 10
 let points = 0
 
 // questoes dentro de objetos
@@ -93,33 +93,88 @@ function exibir() {
 
 // passa para a proxima questao
 function proximaQuestao(respostaEscolhida) {
-    resposta[index] = respostaEscolhida
-    if (index < questoes.length) {
-        index++
-        numQuestao()
-        pontuacao()
-        exibir()
+    resposta[index] = respostaEscolhida;
+
+    pontuacao();
+
+    if (index < questoes.length - 1) {
+        index++;
+        exibir();
+    } else {
+        resultado();
     }
 }
 
+
 function pontuacao() {
-    if (resposta[index - 1] == questoes[index - 1].correta) {
-        pontos += 10
+    if (index > 0 && resposta[index - 1] === questoes[index - 1].correta) {
+        pontos += 10;
     }
-    instrucoes.textContent = `Pontuação: ${pontos}`
-    console.log(pontos)
+    instrucoes.textContent = `Pontuação: ${pontos}`;
+    console.log(pontos);
 }
+
 
 // adiciona um clique no botao e chama a proxima questao
 a.addEventListener('click', function () {
-    proximaQuestao('a')
+    if (index <= questoes.length) {
+        proximaQuestao('a')
+    }
 })
 b.addEventListener('click', function () {
-    proximaQuestao('b')
+    if (index <= questoes.length) {
+        proximaQuestao('b')
+    }
 })
 c.addEventListener('click', function () {
-    proximaQuestao('c')
+    if (index <= questoes.length) {
+        proximaQuestao('c')
+    }
 })
 
 // chama a funcao para exibir a questao
 exibir()
+
+// funcao para mostrar o resultado
+function resultado() {
+    let titulo = document.getElementById('titulo')
+
+    let respostaCorreta = document.getElementById('correta')
+    let one = document.getElementsByClassName('one')
+    let two = document.getElementsByClassName('two')
+    let three = document.getElementsByClassName('three')
+    let four = document.getElementsByClassName('four') 
+    let five = document.getElementsByClassName('five')
+
+    let One = document.getElementById('one')
+    let Two = document.getElementById('two')
+    let Three = document.getElementById('three')
+    let Four = document.getElementById('four')
+    let Five = document.getElementById('five')
+
+    titulo.textContent = 'Resultado'
+
+    if (pontos == 50) {
+        mensagem.textContent = 'Parabéns! Você acertou todas as questões.'
+    } else if (pontos >= 30) {
+        mensagem.textContent = 'Parabéns! Você acertou mais da metade das questões.'
+    } else if (pontos >= 10) {
+        mensagem.textContent = 'Você acertou algumas questões.'
+    }
+
+    one[0].textContent =  "sua resposta: " + resposta[0]
+    two[0].textContent =  "sua resposta: " + resposta[1]
+    three[0].textContent =  "sua resposta: " + resposta[2]
+    four[0].textContent =  "sua resposta: " + resposta[3]
+    five[0].textContent =  "sua resposta: " + resposta[4]
+
+    One.textContent =  "resposta correta: " + questoes[0].correta   
+    Two.textContent =  "resposta correta: " + questoes[1].correta
+    Three.textContent =  "resposta correta: " + questoes[2].correta
+    Four.textContent =  "resposta correta: " + questoes[3].correta
+    Five.textContent =  "resposta correta: " + questoes[4].correta
+
+    instrucoes.textContent = `Pontuação final: ${pontos}`
+    document.querySelector('.questoes').style.display = 'none'
+    document.querySelector('.ending').style.display = 'block'
+}
