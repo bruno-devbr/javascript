@@ -36,7 +36,7 @@ main {
 
 section {
     width: 100vw;
-
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -132,6 +132,61 @@ h1 {
 #autoria {
     margin-top: 0.625rem;
     font-size: 0.75rem;
+}
+
+#result {
+    display: none;
+    border: 5px solid rgb(68, 65, 65);
+    border-radius: 10px;
+}
+
+.result {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 0.625rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.result h2 {
+    font-size: 1.5rem;
+    color: var(--principal);
+    margin-bottom: 0.5rem;
+}
+
+.result span {
+    display: block;
+    font-size: 1.25rem;
+    color: #191919;
+}
+
+.result .resposta-correta {
+    font-weight: bold;
+    color: var(--secundaria);   
+}
+
+button.back {
+    display: block;
+    margin: 1rem auto;
+}
+
+button.back {
+    display: none;
+    background: var(--principal);
+    color: var(--branco);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button.back:hover {
+    background: var(--secundaria);
 }
 
 /* ANIMACAO */

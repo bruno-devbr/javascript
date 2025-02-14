@@ -14,7 +14,7 @@
 
         <section class='conteudos'>
 
-            <h1>Quiz</h1>
+            <h1 id="title">Quiz</h1>
 
             <article class='centro' id='instrucoes'>
                 Leia a questão e clique na resposta correta
@@ -33,11 +33,63 @@
                 -->
                 <div class='corpo'>
                     <ol type='A' id='alternativas'>
-                        <li id='a' value='1A' class='respostas' onClick='verificarSeAcertou(this, this)'></li>
-                        <li id='b' value='1B' class='respostas' onClick='verificarSeAcertou(this, this)'></li>
-                        <li id='c' value='1C' class='respostas' onClick='verificarSeAcertou(this, this)'></li>
-                        <li id='d' value='1D' class='respostas' onClick='verificarSeAcertou(this, this)'></li>
+                        <li id='a' value='1A' class='respostas'></li>
+                        <li id='b' value='1B' class='respostas'></li>
+                        <li id='c' value='1C' class='respostas'></li>
+                        <li id='d' value='1D' class='respostas'></li>
                     </ol>
+                </div>
+            </article>
+            <article id="result">
+                <div class="result">
+                    <h2>Questao 1</h2>
+                    <span class="one resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="one"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 2</h2>
+                    <span class="two resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="two"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 3</h2>
+                    <span class="theree resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="three"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 4</h2>
+                    <span class="fou resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="four"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 5</span></h2>
+                    <span class="fiv resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="five"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 6</h2>
+                    <span class="six resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="six"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 7</h2>
+                    <span class="sev resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="seven"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 8</h2>
+                    <span class="eight resposta-correta"></span> <br>
+                    <span class="sua-resposta"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 9</span></h2>
+                    <span class="nine resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="nine"></span>
+                </div>
+                <div class="result">
+                    <h2>Questao 10</h2>
+                    <span class="ten resposta-correta"></span> <br>
+                    <span class="sua-resposta" id="ten"></span>
                 </div>
             </article>
             
@@ -50,8 +102,8 @@
         
             <footer id='autoria' class='centro'>Desenvolvido por Edson Maia &copy; 2021</footer>
 
+            <button class="back">Voltar pro Quiz</button>
         </section>
-
     </main>
 <audio preload src="positive.mp3" id='somAcerto'></audio>
 <audio preload src="negative.mp3" id='somErro'></audio>
