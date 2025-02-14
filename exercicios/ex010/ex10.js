@@ -13,8 +13,7 @@ let c = document.getElementById('c')
 
 let mensagem = document.getElementById('aviso')
 let resposta = []
-let pontos = 10
-let points = 0
+let pontos = 0
 
 // questoes dentro de objetos
 let q1 = { 
@@ -107,7 +106,7 @@ function proximaQuestao(respostaEscolhida) {
 
 
 function pontuacao() {
-    if (index > 0 && resposta[index - 1] === questoes[index - 1].correta) {
+    if (resposta[index] === questoes[index].correta) {
         pontos += 10;
     }
     instrucoes.textContent = `Pontuação: ${pontos}`;
